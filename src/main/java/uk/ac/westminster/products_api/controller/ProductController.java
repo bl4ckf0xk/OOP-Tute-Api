@@ -1,6 +1,7 @@
-package uk.ac.westminster.products_api;
+package uk.ac.westminster.products_api.controller;
 
 import org.springframework.web.bind.annotation.*;
+import uk.ac.westminster.products_api.dto.Product;
 
 @RestController
 @RequestMapping("/products")

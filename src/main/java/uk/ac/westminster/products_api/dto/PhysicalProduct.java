@@ -1,8 +1,11 @@
 package uk.ac.westminster.products_api.dto;
 
-public class PhysicalProduct extends Product {
+import java.io.Serializable;
+
+public class PhysicalProduct extends Product implements Discountable {
     private double weight;
     private String shippingAddress;
+    private double discountedPrice;
 
     public PhysicalProduct(long id, String name, double price, double weight, String shippingAddress) {
         super(id, name, price);
@@ -24,5 +27,21 @@ public class PhysicalProduct extends Product {
 
     public void setShippingAddress(String shippingAddress) {
         this.shippingAddress = shippingAddress;
+    }
+
+
+    public String getSummary() {
+        return "Physical:" + getName();
+    }
+
+    @Override
+    public void applyDiscount(double rate) {
+        double capped = Math.min(rate, 0.20);
+        discountedPrice = getPrice() * (1 - capped);
+    }
+
+    @Override
+    public double getDiscountedPrice() {
+        return discountedPrice;
     }
 }

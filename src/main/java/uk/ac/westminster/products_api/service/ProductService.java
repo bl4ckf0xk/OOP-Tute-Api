@@ -12,9 +12,9 @@ import java.util.Locale;
 
 @Service
 public class ProductService {
-    private List<Product> products =  new ArrayList<>();
+    private static List<Product> products =  new ArrayList<>();
 
-    private Long nextId = 1L;
+    private static Long nextId = 1L;
 
     public ProductService() {
         System.out.println("ProductService constructor executed");
@@ -28,7 +28,7 @@ public class ProductService {
         return products;
     }
 
-    public Product addProduct(Product product) {
+    public static Product addProduct(Product product) {
         System.out.println("addProduct() executed");
         product.setId(nextId++);
         nextId += 1L;
@@ -44,4 +44,31 @@ public class ProductService {
         ).toList();
     }
 
+    public static String Test(Long id){
+        return products.get(Math.toIntExact(id)).testOver();
+    }
+
+    public static List<Product> getAllProducts(){
+        System.out.println("getAllProducts() executed");
+        return products;
+    }
+
+    public static String testGetSummaryById(Long id) {
+        Product b = new DigitalProduct(2L, "E-book", 9.99, "/dl/2", 4.2);
+        DigitalProduct c = new DigitalProduct(3L, "Audiobook", 14.99, "/dl/3", 92.0);
+//        Product dummy = products.get(Math.toIntExact(id));
+        return ((DigitalProduct)b).getDownloadUrl();
+    }
+
+    public static Product getProductById(Long id){
+        System.out.println("getProductById() executed");
+        return products.get(Math.toIntExact(id));
+    }
+
+    public List<String> getAllSummaries() {
+        System.out.println("getAllSummaries() executed");
+        ArrayList<String> summaries = new ArrayList<>();
+        for (Product p: products) {summaries.add(p.getSummary());}
+        return summaries;
+    }
 }

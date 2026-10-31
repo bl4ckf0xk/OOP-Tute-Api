@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
         @JsonSubTypes.Type(DigitalProduct.class),
         @JsonSubTypes.Type(PhysicalProduct.class)
 })
-public class Product {
+public abstract class Product {
     private Long id;
     private String name;
     private Double price;
@@ -45,4 +45,10 @@ public class Product {
     public void setPrice(Double price) {
         this.price = price;
     }
+
+    public String testOver() {
+        return "test parent";
+    }
+
+    public abstract String getSummary();
 }
